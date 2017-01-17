@@ -29,7 +29,7 @@ class GramsController < ApplicationController
 
   	if @gram.valid?
 		redirect_to root_path
-	else
+	  else
 		return render :edit, status: :unprocessable_entity
 	end
 
@@ -39,10 +39,11 @@ class GramsController < ApplicationController
   	@gram = Gram.find_by_id(params[:id])
   	if @gram.blank?
   		return render_not_found
-	end  
+	  end  
   end
 
   def index
+    @grams = Gram.all
   end
 
   def new
@@ -61,7 +62,7 @@ class GramsController < ApplicationController
   private
 
   def gram_params
-  	params.require(:gram).permit(:message)
+  	params.require(:gram).permit(:message, :picture)
   end
 
   def render_not_found(status=:not_found)
